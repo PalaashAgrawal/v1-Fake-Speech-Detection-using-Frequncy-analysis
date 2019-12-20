@@ -1,0 +1,35 @@
+Following is a model that can detect whether an audio sample was spoken by Donald Trump himself or spoken by an Impersonator.
+I used the following audio samples for training/validation sets:
+
+REAL DONALD TRUMP
+1. Donald Trump delivers a speech on the environment from the White House - watch live
+https://www.youtube.com/watch?v=fDQuO1nm_NY
+2.Donald Trump's victory speech in full – video
+https://www.youtube.com/watch?v=owuq_An4cnk
+3. The most bizarre moments from Donald Trump’s CPAC speech
+https://www.youtube.com/watch?v=g5HHZI_pe3w
+4. WATCH AGAIN: Donald Trump addresses United Nations General Assembly
+https://www.youtube.com/watch?v=fQXgCcmgav0
+5. President Donald Trump speaks at his Hershey rally (full speech)
+https://www.youtube.com/watch?v=t5C98Fnl0M4
+
+IMPERSONATIONS
+1.Donald Trump and Little Donald (8th Grade Impressionist)
+https://www.youtube.com/watch?v=QP0i4YAs9vA
+2. Donald Trump Press Conference Cold Open - SNL
+https://www.youtube.com/watch?v=4_Gf0mGJfP8
+3. Donald Trump Interviews Himself In the Mirror
+https://www.youtube.com/watch?v=c2DgwPG7mAA
+4. Meet the highest-paid Trump impersonator
+https://www.youtube.com/watch?v=x4TvNz9B1V0
+5. Donald Trump impersonator John Di Domenico on the Today Show w: Howard X as Kim Jong Un HD
+https://www.youtube.com/watch?v=YZN835WPZqg
+6. World's Best Trump Impersonator #ThomasMundy
+https://www.youtube.com/watch?v=hHOfUU7IvGE
+
+I downloaded .wav audio files (uncompressed audio files) for each of these videos and fed them into Audacity software (https://www.audacityteam.org/)
+For sake of consistency, I first Amplified and Normalized each audio file to a standard value. Then I went through all of the audio files, and carefully selected only those snippets where only the subject spoke, with no or minimal background noise and voices, and where the speech was clear and loud enough.
+Next, I plotted the frequency domain audio spectrums for all such snippets (there’s an option to plot audio spectra in Audacity), and cropped out the plot and saved the image. I specifically considered frequency-domain analysis instead of time-domain analysis, because a person’s frequency spectrum is more charecteristic of his natural voice than his/her enunciation.
+
+Thus I made a 200+ image dataset of frequency analysis of Real and Impersonated Donald Trump voice samples. 20% of this dataset was set aside as validation set.
+This was fed into a standard resnet34 with pretrained weights, and was trained. The final accuracy (measured on the validation set) was 92.5%.
